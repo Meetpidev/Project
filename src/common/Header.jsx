@@ -608,31 +608,31 @@
 //               </div>
 
 //               {/* NAVIGATION ITEMS + ACTION BUTTON */}
-//               <div className="flex items-center justify-between w-full p-4">
+              // <div className="flex items-center justify-between w-full p-4">
 
-//                 <div className="hidden lg:flex items-center ml-2 mr-5">
-//                   <button
-//                     onClick={handleContactUs}
-//                     className="bg-[#D2497E] hover:bg-cyan-600 text-white px-6 py-2 font-bold rounded-lg transition"
-//                     data-testid="button-contact-us"
-//                     style={{ minWidth: 120 }}
-//                   >
-//                     Let's Talk AI
-//                   </button>
-//                 </div>
+              //   <div className="hidden lg:flex items-center ml-2 mr-5">
+              //     <button
+              //       onClick={handleContactUs}
+              //       className="bg-[#D2497E] hover:bg-cyan-600 text-white px-6 py-2 font-bold rounded-lg transition"
+              //       data-testid="button-contact-us"
+              //       style={{ minWidth: 120 }}
+              //     >
+              //       Let's Talk AI
+              //     </button>
+              //   </div>
 
-//                 {/* CONTACT US BUTTON */}
-//                 <div className="hidden lg:flex items-center">
-//                   <button
-//                     onClick={handleContactUs}
-//                     className="bg-cyan-500 hover:bg-cyan-600 text-black py-2 font-bold rounded-lg transition"
-//                     data-testid="button-contact-us"
-//                     style={{ minWidth: 120 }}
-//                   >
-//                     Contact Us
-//                   </button>
-//                 </div>
-//               </div>
+              //   {/* CONTACT US BUTTON */}
+              //   <div className="hidden lg:flex items-center">
+              //     <button
+              //       onClick={handleContactUs}
+              //       className="bg-cyan-500 hover:bg-cyan-600 text-black py-2 font-bold rounded-lg transition"
+              //       data-testid="button-contact-us"
+              //       style={{ minWidth: 120 }}
+              //     >
+              //       Contact Us
+              //     </button>
+              //   </div>
+              // </div>
 //             </div>
 //             {/* MOBILE MENU TOGGLE */}
 //             <div className="lg:hidden flex-shrink-0 ml-auto">
@@ -961,6 +961,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                     {label}
                     <ChevronDown className="w-4 h-4 ml-1" />
                   </button>
+                  
                   {/* -------- MEGA MENUS: Responsive Layouts -------- */}
                   {megaMenuVisible === menu && (
                     <div>
@@ -1268,11 +1269,34 @@ const [openDropdown, setOpenDropdown] = useState(null);
                           </div>
                       )}
                     </div>
+                    
                   )}
                 </div>
+
+                
               ))}
               {/* ... End main nav ... */}
             </div>
+
+            {/* Desktop-only buttons */}
+          <div className="hidden lg:flex items-center ml-auto space-x-4">
+            <button
+             
+              className="bg-[#D2497E] hover:bg-cyan-600 text-white px-6 py-2 font-bold rounded-lg transition"
+              data-testid="button-lets-talk-ai"
+              style={{ minWidth: 120 }}
+            >
+              Let's Talk AI
+            </button>
+            <button
+              
+              className="bg-cyan-500 hover:bg-cyan-600 text-black py-2 font-bold rounded-lg transition"
+              data-testid="button-contact-us"
+              style={{ minWidth: 120 }}
+            >
+              Contact Us
+            </button>
+          </div>
             {/* Mobile Hamburger Toggle */}
             <div className="ml-auto flex lg:hidden">
               <button onClick={toggleMobileMenu} className="hover:text-blue-600 transition-colors p-2" aria-label="Toggle mobile menu">
@@ -1284,61 +1308,94 @@ const [openDropdown, setOpenDropdown] = useState(null);
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-2xl z-50 transform transition-transform duration-300 ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <nav className="px-4 py-6 space-y-6 overflow-y-auto h-full mt-16">
-          {navigationItems.map(({ label, items }) => (
-            <div key={label}>
-              <button
-                className="flex justify-between items-center w-full font-semibold text-blue-700 text-lg mb-2"
-                onClick={() => toggleDropdown(label)}
-                aria-expanded={openDropdown === label}
-              >
-                {label}
-                <ChevronDown
-                  className={`transition-transform duration-300 ${
-                    openDropdown === label ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {openDropdown === label && (
-                <ul className="pl-4 space-y-1 border-l border-blue-200">
-                  {items.map(({ label: itemLabel, to }) => (
-                    <li key={itemLabel}>
-                      <Link
-                        to={to}
-                        className="block py-1 text-gray-700 hover:text-blue-700"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setOpenDropdown(null);
-                          document.body.style.overflow = "auto";
-                        }}
-                      >
-                        {itemLabel}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-        </nav>
-      </div>
+    <div
+  className={`fixed top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-2xl z-50 transform transition-transform duration-300 
+    ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+>
+  {/* HEADER: Logo + Close button */}
+  <div className="flex items-center justify-between w-full p-4 border-b border-gray-200">
+    <Link to="/" className="flex items-center">
+            <img src={logo} alt="Logo" className="h-10 w-10 object-contain" />
+            <span className="text-black-900 ml-4" style={{fontWeight: 'bold'}}>Kryzenm Software solutions</span>
+    </Link>
+    <button
+      className="text-blue-700 p-2"
+      onClick={() => {
+        setIsMobileMenuOpen(false);
+        setOpenDropdown(null);
+        document.body.style.overflow = "auto";
+      }}
+      aria-label="Close mobile menu"
+    >
+      <X className="w-7 h-7" />
+    </button>
+  </div>
 
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={() => {
-            setIsMobileMenuOpen(false);
-            setOpenDropdown(null);
-            document.body.style.overflow = "auto";
-          }}
-        />
-      )}
-      {isMobileMenuOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={closeMobileMenu}></div>}
+  <nav className="px-4 py-6 space-y-6 overflow-y-auto h-full">
+    {navigationItems.map(({ label, items }) => (
+      <div key={label}>
+        <button
+          className="flex justify-between items-center w-full font-semibold text-blue-700 text-lg mb-2"
+          onClick={() => toggleDropdown(label)}
+          aria-expanded={openDropdown === label}
+        >
+          {label}
+          <ChevronDown
+            className={`transition-transform duration-300 ${openDropdown === label ? "rotate-180" : ""}`}
+          />
+        </button>
+        {openDropdown === label && (
+          <ul className="pl-4 space-y-1 border-l border-blue-200">
+            {items.map(({ label: itemLabel, to }) => (
+              <li key={itemLabel}>
+                <Link
+                  to={to}
+                  className="block py-1 text-gray-700 hover:text-blue-700"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setOpenDropdown(null);
+                    document.body.style.overflow = "auto";
+                  }}
+                >
+                  {itemLabel}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+
+    <div className="flex items-center justify-between w-full p-4 border-t border-gray-200">
+      <button
+        className="bg-[#D2497E] mr-4 whitespace-nowrap hover:bg-cyan-600 text-white px-4 py-2 font-bold rounded-lg transition"
+        data-testid="button-lets-talk-ai"
+        style={{ minWidth: 120 }}
+      >
+        Let's Talk AI
+      </button>
+      <button
+        className="bg-cyan-500 hover:bg-cyan-600 text-black py-2 font-bold rounded-lg transition"
+        data-testid="button-contact-us"
+        style={{ minWidth: 120 }}
+      >
+        Contact Us
+      </button>
+    </div>
+  </nav>
+</div>
+
+{/* SINGLE backdrop only */}
+{isMobileMenuOpen && (
+  <div
+    className="fixed inset-0 bg-white bg-opacity-50 z-40 lg:hidden"
+    onClick={() => {
+      setIsMobileMenuOpen(false);
+      setOpenDropdown(null);
+      document.body.style.overflow = "auto";
+    }}
+  />
+)} 
     </div>
   );
 }
