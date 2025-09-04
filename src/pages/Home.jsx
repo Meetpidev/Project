@@ -17,6 +17,7 @@ import TestimonialSlider from "../components/TestimonialSlider.jsx";
 import BlogCards from "../components/BlogCards.jsx";
 import FeaturedLogos from "../components/FeaturedLogos.jsx";
 
+
 function Home() {
   return (
     <div>

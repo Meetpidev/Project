@@ -101,79 +101,6 @@ function IndiaFlag() {
     );
 }
 
-function USAFlag() {
-    return (
-        <div className="w-8 h-6 rounded-sm overflow-hidden border border-gray-300">
-            <div className="w-full h-full bg-gradient-to-r from-red-600 to-blue-800 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-white via-30% to-blue-800"></div>
-                <div className="absolute top-0 left-0 w-3 h-3 bg-blue-800 flex flex-wrap">
-                    <div className="w-1 h-1 bg-white m-px"></div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function CanadaFlag() {
-    return (
-        <div className="w-8 h-6 rounded-sm overflow-hidden flex border border-gray-300">
-            <div className="w-2 bg-red-600"></div>
-            <div className="w-4 bg-white flex items-center justify-center relative">
-                <div className="w-3 h-4 text-red-600 flex items-center justify-center">
-                    <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 3L8 7h4l-2-4zM6 9l2 2v6l2-2 2 2V11l2-2H6z" />
-                    </svg>
-                </div>
-            </div>
-            <div className="w-2 bg-red-600"></div>
-        </div>
-    );
-}
-
-function AustraliaFlag() {
-    return (
-        <div className="w-8 h-6 rounded-sm overflow-hidden bg-blue-800 relative border border-gray-300">
-            <div className="absolute top-0 left-0 w-4 h-3 bg-blue-900 flex items-center justify-center">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-            </div>
-            <div className="absolute bottom-0 right-0 w-3 h-3 bg-white flex items-center justify-center">
-                <div className="w-1 h-1 bg-red-600"></div>
-            </div>
-        </div>
-    );
-}
-
-function UKFlag() {
-    return (
-        <div className="w-8 h-6 rounded-sm overflow-hidden bg-blue-800 relative border border-gray-300">
-            <div className="absolute inset-0 bg-blue-800"></div>
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                <div className="w-full h-px bg-white"></div>
-            </div>
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                <div className="w-px h-full bg-white"></div>
-            </div>
-            <div className="absolute top-0 left-0 w-full h-full">
-                <div className="absolute top-0 left-0 w-full h-px bg-red-600"></div>
-                <div className="absolute top-0 left-0 w-px h-full bg-red-600"></div>
-            </div>
-        </div>
-    );
-}
-
-function UAEFlag() {
-    return (
-        <div className="w-8 h-6 rounded-sm overflow-hidden flex border border-gray-300">
-            <div className="w-2 bg-red-600"></div>
-            <div className="w-6 flex flex-col">
-                <div className="h-2 bg-green-600"></div>
-                <div className="h-2 bg-white"></div>
-                <div className="h-2 bg-black"></div>
-            </div>
-        </div>
-    );
-}
-
 export default function AppFooter() {
     const offices = [
         {
@@ -186,52 +113,6 @@ export default function AppFooter() {
                 "INDIA"
             ]
         },
-        {
-            country: "USA",
-            flag: <USAFlag />,
-            address: [
-                "5900 NW 18th Ave",
-                "Coral Springs,",
-                "Florida, FL 33076"
-            ]
-        },
-        {
-            country: "Canada",
-            flag: <CanadaFlag />,
-            address: [
-                "101 Bow Meadow Cove",
-                "Unit#403 Calgary",
-                "AB, T2J 0G8"
-            ]
-        },
-        {
-            country: "Australia",
-            flag: <AustraliaFlag />,
-            address: [
-                "U 28 305 Harborne",
-                "Street, Glendalough",
-                "6016 WA"
-            ]
-        },
-        {
-            country: "UK",
-            flag: <UKFlag />,
-            address: [
-                "42 Audley Avenue,",
-                "Gillingham ME7 3AY",
-                "United Kingdom"
-            ]
-        },
-        {
-            country: "UAE",
-            flag: <UAEFlag />,
-            address: [
-                "Al building 21",
-                "Ghoroob,Mirdiff",
-                "Dubai, United Arab",
-                "Emirates"
-            ]
-        }
     ];
 
     return (
