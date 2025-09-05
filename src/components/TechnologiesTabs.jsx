@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const TABS = [
   { label: "Cloud & Devops", key: "cloud" },
@@ -34,7 +35,6 @@ infrastructure management and software development. To enhance your cloud experi
       { name: "Vue Js", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" },
       { name: "Vue Js", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" },
       { name: "Vue Js", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" },
-      
     ],
   },
   backend: {
@@ -84,27 +84,97 @@ infrastructure management and software development. To enhance your cloud experi
 
 export default function TechnologiesTabs() {
   const [activeTab, setActiveTab] = useState("cloud");
+  const [mobileTabStart, setMobileTabStart] = useState(0);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 640 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      setMobileTabStart(0);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const visibleTabs = isMobile
+    ? TABS.slice(mobileTabStart, mobileTabStart + 2)
+    : TABS;
+
+  const leftDisabled = mobileTabStart === 0;
+  const rightDisabled = mobileTabStart + 2 >= TABS.length;
+
   const tabContent = TAB_CONTENT[activeTab];
 
   return (
     <div className="max-w-6xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold text-center mb-4">Technologies We Work With</h1>
+      <h1 className="text-4xl font-bold text-center mb-4">
+        Technologies We Work With
+      </h1>
       <p className="text-center text-lg text-gray-600 mb-8">
-        We work on wide range of tools and technologies to cater client business requirement for existing project or new application.
+        We work on wide range of tools and technologies to cater client business
+        requirement for existing project or new application.
       </p>
+
       {/* Tab Navigation */}
-      <div className="flex flex-wrap gap-3 justify-center mb-8">
-        {TABS.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`px-6 py-2 text-lg font-semibold rounded transition bg-[#005D89]-200 hover:bg-blue-200 ${
-              activeTab === tab.key ? "bg-blue-900 text-white" : ""
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div className="mb-8 flex items-center justify-center">
+        {isMobile ? (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setMobileTabStart((i) => Math.max(0, i - 1))}
+              disabled={leftDisabled}
+              aria-label="Show previous tabs"
+              className={`rounded-full p-2 bg-blue-100 transition ${
+                leftDisabled ? "opacity-30 cursor-not-allowed" : "hover:bg-blue-200"
+              }`}
+            >
+              <ChevronLeft className="w-5 h-5 text-blue-900" />
+            </button>
+            {visibleTabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`px-6 py-2 text-lg font-semibold rounded transition whitespace-nowrap ${
+                  activeTab === tab.key
+                    ? "bg-blue-900 text-white"
+                    : "bg-[#005D89]-200 hover:bg-blue-200"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+            <button
+              onClick={() =>
+                setMobileTabStart((i) => Math.min(i + 1, TABS.length - 2))
+              }
+              disabled={rightDisabled}
+              aria-label="Show next tabs"
+              className={`rounded-full p-2 bg-blue-100 transition ${
+                rightDisabled ? "opacity-30 cursor-not-allowed" : "hover:bg-blue-200"
+              }`}
+            >
+              <ChevronRight className="w-5 h-5 text-blue-900" />
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-3 justify-center">
+            {TABS.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`px-6 py-2 text-lg font-semibold rounded transition whitespace-nowrap ${
+                  activeTab === tab.key
+                    ? "bg-blue-900 text-white"
+                    : "bg-[#005D89]-200 hover:bg-blue-200"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Tab Content */}
@@ -113,17 +183,16 @@ export default function TechnologiesTabs() {
           <h2 className="text-3xl font-bold mb-4">{tabContent.title}</h2>
           <p className="text-gray-700">{tabContent.description}</p>
         </div>
-        <div className="md:w-3/5 grid grid-cols-2 md:grid-cols-3 gap-6">
-          {tabContent.tools.map((tool) => (
-            <div
-              key={tool.name}
-              className="bg-white rounded-lg shadow p-6 flex flex-col items-center"
-            >
-              {/* Replace src with your icon image path */}
-              <img src={tool.icon} alt={tool.name} className="h-12 w-12 mb-3" />
-              <span className="font-semibold text-lg">{tool.name}</span>
-            </div>
-          ))}
+        <div className="md:w-3/5 grid grid-cols-2 sm:grid-cols-3 gap-6">
+         {tabContent.tools.map((tool, idx) => (
+  <div
+    key={`${tool.name}-${idx}`} 
+    className="bg-white rounded-lg shadow p-6 flex flex-col items-center"
+  >
+    <img src={tool.icon} alt={tool.name} className="h-12 w-12 mb-3" />
+    <span className="font-semibold text-lg">{tool.name}</span>
+  </div>
+))}
         </div>
       </div>
     </div>

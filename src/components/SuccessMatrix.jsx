@@ -1,4 +1,4 @@
-import React from "react";
+import { useState,useEffect } from "react";
 
 const successMatrixData = [
   {
@@ -106,6 +106,82 @@ const successMatrixData = [
 ];
 
 export default function SuccessMatrix() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSmallOrMedium, setIsSmallOrMedium] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsSmallOrMedium(window.innerWidth < 1024);
+    };
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  useEffect(() => {
+    if (!isSmallOrMedium) return;
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex =>
+        prevIndex === successMatrixData.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isSmallOrMedium]);
+
+  const prev = () => {
+    setCurrentIndex(prevIndex =>
+      prevIndex === 0 ? successMatrixData.length - 1 : prevIndex - 1
+    );
+  };
+
+  const next = () => {
+    setCurrentIndex(prevIndex =>
+      prevIndex === successMatrixData.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  if (isSmallOrMedium) {
+    // single card carousel view
+    const item = successMatrixData[currentIndex];
+    return (
+      <div className="bg-blue-50 py-12 px-4 flex flex-col items-center min-h-[60vj]">
+        <div className="max-w-md w-full text-center">
+          <h2 className="text-4xl font-extrabold mb-4 text-gray-900">Success Matrix</h2>
+          <p className="mb-12 text-lg text-gray-700">
+            We offer comprehensive services to develop digital solutions &amp; manage complete product lifecycle. We've robust work history with diverse business services.
+          </p>
+          <div className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-full">
+            {item.icon}
+            <div className="font-bold text-lg text-center">{item.title}</div>
+          </div>
+          <div className="flex justify-center gap-6 mt-8">
+            <button
+              onClick={prev}
+              aria-label="Previous item"
+              className="p-3 rounded-full bg-white hover:bg-gray-100 transition"
+            >
+              {/* Left arrow */}
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next item"
+              className="p-3 rounded-full bg-white hover:bg-gray-100 transition"
+            >
+              {/* Right arrow */}
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // large screen grid view
   return (
     <div className="bg-blue-50 py-12 px-4">
       <div className="max-w-6xl mx-auto text-center">

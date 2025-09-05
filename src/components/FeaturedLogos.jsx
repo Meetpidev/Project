@@ -80,8 +80,8 @@ export default function FeaturedLogos() {
     return (
         <>
             <section className="w-full bg-white py-12 px-3">
-                <h2 className="text-4xl font-bold text-center mb-6">We Have Been Featured In</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-7 max-w-5xl mx-auto">
+                <h2 className="hidden lg:block text-4xl font-bold text-center mb-6">We Have Been Featured In</h2>
+                <div className="hidden lg:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-7 max-w-5xl mx-auto">
                     {logos.map((logo, i) => (
                         <div
                             key={i}

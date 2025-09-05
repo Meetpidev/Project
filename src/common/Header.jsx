@@ -772,11 +772,7 @@ import { ChevronDown, Menu, X, Mail, Calendar, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "./image.png"; // Replace with your actual logo import
 
-const products = [
-  { title: "Vidyalaya School Management Software" },
-  { title: "Vidyalaya Learning Management System" },
-  { title: "Occupational Health And Safety Software" }
-];
+
 const ratings = [
   { label: "Google", reviews: "1012 REVIEWS" },
   { label: "Clutch", reviews: "301 REVIEWS" },
@@ -814,10 +810,6 @@ const navigationItems = [
       { label: "Careers", to: "/careers" },
       { label: "Contact Us", to: "/contact" }
     ],
-  },
-  {
-    label: "Product",
-    items: [{ label: "Demo", to: "/demo" }],
   },
   {
     label: "Service",
@@ -889,7 +881,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                   alt="US Flag"
                   className="w-4 h-3"
                 />
-                <span className="text-xs lg:text-sm">For Sales: +1-954-258-7870</span>
+                <span className="text-xs lg:text-sm text-white">For Sales: +1-954-258-7870</span>
               </div>
 
               {/* India Sales */}
@@ -899,13 +891,13 @@ const [openDropdown, setOpenDropdown] = useState(null);
                   alt="India Flag"
                   className="w-4 h-3"
                 />
-                <span className="text-xs lg:text-sm">For Sales: +91-942-070-8662</span>
+                <span className="text-xs lg:text-sm text-white">For Sales: +91-942-070-8662</span>
               </div>
 
               {/* Company Location */}
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-blue-300" />
-                <span className="text-xs lg:text-sm">Kryzen Software Solutions</span>
+                <span className="text-xs lg:text-sm text-white">Kryzen Software Solutions</span>
               </div>
             </div>
 
@@ -914,14 +906,14 @@ const [openDropdown, setOpenDropdown] = useState(null);
               {/* Email Contact */}
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-blue-300" />
-                <span className="text-xs lg:text-sm">contact@Kryzensolutions.net</span>
+                <span className="text-xs lg:text-sm text-white">contact@Kryzensolutions.net</span>
               </div>
 
               {/* Schedule Meeting */}
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-blue-300" />
                 <button
-                  className="text-xs lg:text-sm cursor-pointer hover:text-blue-200 transition-colors"
+                  className="text-xs lg:text-sm text-white cursor-pointer hover:text-blue-200 transition-colors"
                   data-testid="button-schedule-meeting"
                 >
                   Schedule a Meeting
@@ -942,13 +934,12 @@ const [openDropdown, setOpenDropdown] = useState(null);
               <Link to='/' className="rounded p-2 flex-shrink-0">
                 <img src={logo} alt="Logo" className="h-12 w-12 object-contain" />
               </Link>
-              <Link to='/'><span className={`text-2xl font-bold ${isScrolled ? "text-gray-900" : "text-navbar-text"}`}>Kryzen</span><p className="text-gray">Software solutions</p></Link>
+              <Link to='/'><span className={`text-2xl font-bold ${isScrolled ? "text-black" : "text-navbar-text text-white"}`}>Kryzen</span><p className={`${isScrolled ? "text-black" : " text-white"}`}>Software solutions</p></Link>
             </div>
             <div className="hidden lg:flex flex-1 flex-wrap items-center space-x-3">
               {/* Mega Menu Triggers */}
               {[
                 { label: "Company", menu: "company" },
-                { label: "Product", menu: "products" },
                 { label: "Service", menu: "service" },
                 { label: "Technology", menu: "technology" },
                 { label: "Our Work", menu: "ourwork" }
@@ -957,7 +948,9 @@ const [openDropdown, setOpenDropdown] = useState(null);
                   onMouseEnter={() => setMegaMenuVisible(menu)}
                   onMouseLeave={() => setMegaMenuVisible(null)}
                 >
-                  <button className="flex items-center font-semibold text-gray-900 hover:text-blue-700 px-4 py-2 transition">
+                  <button className={`flex items-center font-semibold px-4 py-2 transition ${
+      isScrolled ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+    }`}>
                     {label}
                     <ChevronDown className="w-4 h-4 ml-1" />
                   </button>
@@ -1038,60 +1031,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                             </div>
                           </div>
                           </div>
-                      )}
-                      {menu === 'products' && (
-                        <div className="absolute left-[15rem] w-[100vw] mt-3 max-w-[1750px] -translate-x-1/2 bg-white z-50 shadow-xl flex rounded">
-                      {/* Left Panel */}
-                      <div className="bg-[#0178a8] flex flex-col justify-between text-white p-10 min-w-[350px] max-w-[390px]">
-                        <div>
-                          <div className="text-3xl font-bold mb-5">Product</div>
-                          <div className="mb-7 text-xl leading-snug">
-                            Our Curiosity Has Led Us To Break New Grounds And Nurture A Brave New World Of Innovative Products.
-                          </div>
-                        </div>
-                        <button className="bg-white text-[#0178a8] px-8 py-3 rounded font-bold mt-5 hover:bg-blue-50 transition">
-                          Book A Demo
-                        </button>
-                      </div>
-
-                      {/* Main Product Cards and Reviews Row */}
-                      <div className="flex-1 flex flex-col justify-between px-6 py-8">
-                        {/* Product Cards */}
-                        <div className="flex justify-between items-start gap-6 mb-5">
-                          {products.map((prod) => (
-                            <div key={prod.title} className="bg-[#f5fafc] rounded-xl flex flex-col justify-center items-center px-8 py-9 w-1/3 mx-1 shadow-sm">
-                              <div className="font-bold text-xl text-gray-800 text-center leading-tight">
-                                {prod.title}
-                              </div>
-                              {prod.desc && <div className="text-sm text-center text-gray-600 mt-1">{prod.desc}</div>}
-                            </div>
-                          ))}
-                        </div>
-                        {/* Reviews and Rating Row */}
-                        <div>
-                          <div className="font-bold text-blue-800 text-lg mb-2">REVIEWS AND RATING</div>
-                          <div className="flex items-center gap-8">
-                            {ratings.map((rate) => (
-                              <div key={rate.label} className="flex flex-col items-center">
-                                <span className="text-black font-bold text-xs">{rate.reviews}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Right Partner Panel */}
-                      <div className="bg-blue-50 flex flex-col items-center justify-center min-w-[350px] max-w-[400px] px-12 py-6 text-center">
-                        <div className="text-2xl font-bold text-gray-900 mb-3">
-                          Let's grow together <br /><span className="text-black">Partner with us</span>
-                        </div>
-                        <button className="bg-[#0178a8] text-white font-semibold px-8 py-3 rounded mt-4 mb-8 hover:bg-blue-900 transition">
-                          Get A Quote
-                        </button>
-                        <img src='https://www.shutterstock.com/shutterstock/photos/1549501607/display_1500/stock-vector-two-people-shake-hands-as-a-result-of-agreement-successful-cooperation-happy-businessman-1549501607.jpg' alt="Partner Illustration" className="w-52 max-w-full" />
-                      </div>
-                    </div>
-                      )}
+                      )} 
                       {menu === 'service' && (
                         <div className="absolute left-[8rem] w-[100vw] mt-3 max-w-[1750px] -translate-x-1/2 bg-white z-50 shadow-xl flex rounded">
                       {/* Left info panel */}

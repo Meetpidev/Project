@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 const logos = [
   "https://static.vecteezy.com/system/resources/previews/047/656/219/non_2x/abstract-logo-design-for-any-corporate-brand-business-company-vector.jpg",
@@ -19,14 +19,43 @@ const logos = [
   "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
   "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
   "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
-  "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
-  "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
-  "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
-  "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
-  "https://template.canva.com/EAFyYS36jTM/2/0/1600w-0mcAWJVKyko.jpg",
 ];
 
-export default function Brands() {
+function Brands() {
+  // Show 4 logos at a time on small devices
+  const [startIndex, setStartIndex] = useState(0);
+  const logosPerPage = 4;
+
+  // Calculate wrapping next/prev indices
+  const prev = () => {
+    setStartIndex((prevIndex) =>
+      prevIndex === 0 ? logos.length - logosPerPage : prevIndex - logosPerPage
+    );
+  };
+
+  const next = () => {
+    setStartIndex((prevIndex) =>
+      prevIndex + logosPerPage >= logos.length ? 0 : prevIndex + logosPerPage
+    );
+  };
+
+    useEffect(() => {
+    const interval = setInterval(() => {
+      next();
+    }, 4000); 
+    return () => clearInterval(interval);
+  }, []);
+
+  // Logos slice to display on small devices
+  const currentLogos = logos.slice(startIndex, startIndex + logosPerPage);
+
+  // If slicing goes out of range, concat from start to keep logosPerPage count
+  if (currentLogos.length < logosPerPage) {
+    currentLogos.push(
+      ...logos.slice(0, logosPerPage - currentLogos.length)
+    );
+  }
+
   return (
     <section className="bg-white py-16">
       <div className="max-w-7xl mx-auto px-6 text-center">
@@ -39,8 +68,8 @@ export default function Brands() {
           Building greater futures through innovation and collective knowledge.
         </p>
 
-        {/* Logos Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        {/* Logos Grid for md+ devices */}
+        <div className="hidden md:grid md:grid-cols-6 gap-6">
           {logos.map((logo, index) => (
             <div
               key={index}
@@ -50,7 +79,60 @@ export default function Brands() {
             </div>
           ))}
         </div>
+
+        {/* Logos carousel for small devices */}
+      <div className="md:hidden">
+  <div className="grid grid-cols-2 grid-rows-2 gap-6 mb-6">
+    {currentLogos.map((logo, index) => (
+      <div
+        key={`${startIndex}-${index}`}
+        className="bg-white shadow-md rounded-xl flex items-center justify-center p-6 hover:shadow-lg transition"
+      >
+        <img src={logo} alt="brand logo" className="max-h-12 object-contain" />
+      </div>
+    ))}
+  </div>
+
+  {/* Arrows below logos */}
+  <div className="flex justify-center gap-4">
+    <button
+      onClick={prev}
+      aria-label="Previous logos"
+      className="p-2 rounded-full bg-blue-100 hover:bg-blue-200 transition"
+    >
+      {/* Left arrow */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 text-blue-700"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <button
+      onClick={next}
+      aria-label="Next logos"
+      className="p-2 rounded-full bg-blue-100 hover:bg-blue-200 transition"
+    >
+      {/* Right arrow */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 text-blue-700"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
+export default Brands;

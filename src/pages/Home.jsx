@@ -16,12 +16,13 @@ import CaseStudySlider from "../components/CaseStudySlider.jsx";
 import TestimonialSlider from "../components/TestimonialSlider.jsx";
 import BlogCards from "../components/BlogCards.jsx";
 import FeaturedLogos from "../components/FeaturedLogos.jsx";
+import Demo from "../components/Demo.jsx";
 
 
 function Home() {
   return (
     <div>
-      <Carousel />
+      <Demo />
         <LogoCarousel />
         <Brands />
         <Services />
@@ -33,11 +34,10 @@ function Home() {
         <PremiumServices />
         <SuccessMatrix />
         <InnovativeSlider />
-        <PodcastsSection />
         <CaseStudySlider />
         <TestimonialSlider />
         <BlogCards />
-        <FeaturedLogos />
+      <FeaturedLogos />
     </div>
   )
 }

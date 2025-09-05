@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const processSteps = [
+  // ... your processSteps array as before ...
   {
     title: "Requirement Gathering",
     desc: "Focus would be on documentation first for clarity and better understanding from both sides and come to the same page.",
@@ -76,11 +77,79 @@ const processSteps = [
 ];
 
 export default function ProcessWeFollow() {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isSmallOrMedium, setIsSmallOrMedium] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsSmallOrMedium(window.innerWidth < 1024); // Tailwind lg breakpoint
+    };
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  useEffect(() => {
+    if (!isSmallOrMedium) return; // Only auto-advance on small/medium
+    const interval = setInterval(() => {
+      setCurrentStep(prev => (prev === processSteps.length - 1 ? 0 : prev + 1));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isSmallOrMedium]);
+
+  const prevStep = () => {
+    setCurrentStep(prev => (prev === 0 ? processSteps.length - 1 : prev - 1));
+  };
+
+  const nextStep = () => {
+    setCurrentStep(prev => (prev === processSteps.length - 1 ? 0 : prev + 1));
+  };
+
+  if (isSmallOrMedium) {
+    // Carousel mode single card
+    const step = processSteps[currentStep];
+    return (
+      <div className="px-4 py-12 bg-white max-w-md mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-8">Process We Follow</h2>
+
+        <div className={`${step.color} rounded-2xl p-6 shadow flex flex-col h-full text-center`}>
+          <div className="flex justify-center">{step.icon}</div>
+          <div className="font-bold mt-2 text-xl">{step.title}</div>
+          <p className="mt-2 text-gray-700 text-base">{step.desc}</p>
+          <div className="text-black-300 text-5xl font-bold mt-auto self-center">{step.step}</div>
+        </div>
+
+        <div className="flex justify-center gap-10 mt-8">
+          <button
+            aria-label="Previous step"
+            onClick={prevStep}
+            className="p-3 bg-blue-100 hover:bg-blue-200 rounded-full transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            aria-label="Next step"
+            onClick={nextStep}
+            className="p-3 bg-blue-100 hover:bg-blue-200 rounded-full transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Grid mode for large devices
   return (
-    <div className="px-4 py-12 bg-white">
+    <div className="px-4 py-12 bg-white max-w-6xl mx-auto">
       <h2 className="text-4xl font-bold text-center mb-5">Process We Follow</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-10">
-        {processSteps.slice(0, 4).map((step, i) => (
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+        {processSteps.slice(0, 4).map((step) => (
           <div key={step.title} className={`${step.color} rounded-2xl p-6 shadow flex flex-col h-full`}>
             <div>{step.icon}</div>
             <div className="font-bold mt-2">{step.title}</div>
@@ -89,17 +158,13 @@ export default function ProcessWeFollow() {
           </div>
         ))}
       </div>
+
       {/* Timeline dots and lines */}
       <div className="flex justify-center w-full mb-10">
         <div className="w-[90%] h-12 flex items-center relative">
-          {/* Line */}
           <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 z-0"></div>
           {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="relative z-10 flex-1 flex justify-center"
-              style={{ left: i === 0 ? 0 : undefined, right: i === 7 ? 0 : undefined }}
-            >
+            <div key={i} className="relative z-10 flex-1 flex justify-center">
               <span
                 className="block w-5 h-5 rounded-full border-4 border-white"
                 style={{
@@ -126,8 +191,9 @@ export default function ProcessWeFollow() {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-        {processSteps.slice(4).map((step, i) => (
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {processSteps.slice(4).map((step) => (
           <div key={step.title} className={`${step.color} rounded-2xl p-6 shadow flex flex-col h-full`}>
             <div>{step.icon}</div>
             <div className="font-bold mt-2">{step.title}</div>
