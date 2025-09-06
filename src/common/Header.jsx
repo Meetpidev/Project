@@ -919,14 +919,15 @@ const [openDropdown, setOpenDropdown] = useState(null);
               {/* Schedule Meeting */}
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-blue-300" />
-                <button
+                <Link
+                  to="/contact-us"
                   className={`text-xs lg:text-sm cursor-pointer hover:text-blue-200 transition-colors"
                   data-testid="button-schedule-meeting ${
   (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
 }`}
                 >
                   Schedule a Meeting
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -1002,8 +1003,9 @@ const [openDropdown, setOpenDropdown] = useState(null);
                                    </div>
                                    <div>
                                         <Link to='/choose' onMouseLeave={() => setMegaMenuVisible(null)} className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Why Choose Us</Link>
-                                                                           <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Insightful videos</div>
+                                        <div className="py-3" onMouseLeave={() => setMegaMenuVisible(null)}><Link to="/insightful-videos" className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Insightful videos</Link></div>
                                       </div>
+                                      
                                       
                                    <div>
                                      <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Blog</div>

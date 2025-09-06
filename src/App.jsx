@@ -9,6 +9,8 @@ import AppFooter from "./common/AppFooter.jsx";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import "./App.css";
+import Contact from "./pages/Contact.jsx";
+import InsightFulVideos from "./pages/InsightFulVideos.jsx";
 
 function App() {
   const { pathname } = useLocation();
@@ -25,6 +27,8 @@ function App() {
         <Route path="/choose" element={<Choose />} />
         <Route path="/ceo-message" element={<CeoMsg />} />
         <Route path="/events-activity" element={<Events />} />
+        <Route path="/contact-us" element={<Contact />} />
+        <Route path="/insightful-videos" element={<InsightFulVideos />} />
      </Routes>
       <Footer />
       <AppFooter />
