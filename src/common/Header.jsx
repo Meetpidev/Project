@@ -879,10 +879,13 @@ const [openDropdown, setOpenDropdown] = useState(null);
             <div className="flex flex-wrap items-center gap-6">
               {/* US Sales */}
               <div className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-blue-300"/>
-                <span className={`text-xs lg:text-sm ${
+                <Briefcase className="w-4 h-4 text-blue-300" />a
+                <a href="mailto:career@kryzensoftwaresolutions.com" className={`text-xs lg:text-sm ${
   (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
-}`}>For Career: career@kryzensoftwaresolutions.com</span>
+}`}>
+                  For Career: career@kryzensoftwaresolutions.com
+                </a>
+                
               </div>
 
               {/* India Sales */}
@@ -900,9 +903,9 @@ const [openDropdown, setOpenDropdown] = useState(null);
               {/* Company Location */}
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-blue-300" />
-                <span className={`text-xs lg:text-sm ${
+                <a href="https://maps.app.goo.gl/tXoapvH3Ky1MhVqz5"  target="_blank" rel="noopener noreferrer" className={`text-xs lg:text-sm ${
   (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
-}`}>Kryzen Software Solutions</span>
+}`}>Kryzen Software Solutions</a>
               </div>
             </div>
 
@@ -911,9 +914,9 @@ const [openDropdown, setOpenDropdown] = useState(null);
               {/* Email Contact */}
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-blue-300" />
-                <span className={`text-xs lg:text-sm ${
+                <a href="mailto:contact@kryzensoftwaresolutions.com" className={`text-xs lg:text-sm ${
   (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
-}`}>contact@kryzensoftwaresolutions.com</span>
+}`}>contact@kryzensoftwaresolutions.com</a>
               </div>
 
               {/* Schedule Meeting */}
@@ -944,7 +947,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
               <Link to='/' className="rounded p-2 flex-shrink-0">
                 <img src={logo} alt="Logo" className="h-40 w-25 object-contain"/>
               </Link>
-              <Link to='/' style={{transform: 'transLateX(-1rem)'}}><span className={`text-2xl font-bold ${(!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"}`}>Kryzen</span><p className={`${(!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"}`}>Software solutions</p></Link>
+              <Link to='/' style={{transform: 'transLateX(-1rem)'}}><span className={`text-2xl font-bold ${(!isHome || isScrolled) ? "text-black " : "text-white "}`}>Kryzen</span><p className={`${(!isHome || isScrolled) ? "text-black" : "text-white"}`}>Software solutions</p></Link>
             </div>
             <div className="hidden lg:flex flex-1 flex-wrap items-center space-x-3">
               {/* Mega Menu Triggers */}
