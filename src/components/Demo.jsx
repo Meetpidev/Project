@@ -104,14 +104,13 @@
 // }
 
 import { useEffect, useState } from "react";
+import video1 from "../common/video1.mp4";
+import video2 from "../common/video2.mp4";
 
 export default function Demo() {
   const [currentVideo, setCurrentVideo] = useState(0);
 
-  const videos = [
-    "https://sample-videos.com/video123/mp4/480/asdasdas.mp4",
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-  ];
+  const videos = [video1, video2];
 
   const rightContents = [
     {

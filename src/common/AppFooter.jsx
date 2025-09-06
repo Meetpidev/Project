@@ -7,7 +7,7 @@ import {
     SiYoutube,
     SiGoogle
 } from "react-icons/si";
-import logo from "./image.png";
+import logo from "./logo.png";
 
 // ContactCard Component
 function ContactCard({ title, email, phones }) {
@@ -45,7 +45,7 @@ function OfficeCard({ country, flag, address, highlight }) {
     return (
         <div className={`bg-white rounded-lg shadow-md p-4 min-h-32 ${
             highlight
-                ? "border-2 border-blue-500 ring-2 ring-blue-100 md:p-8" // Larger HQ card
+                ? "border-2 border-blue-500 ring-2 ring-blue-100 md:p-8"
                 : ""
         }`}>
             <div className="flex items-center gap-3 mb-3">
@@ -112,119 +112,118 @@ export default function AppFooter() {
             country: "India(HQ)",
             flag: <IndiaFlag />,
             address: [
-                "301, Ganesh Meridian, Opp.",
-                "Kangri Petrol Pump, S.G. Highway,",
-                "Ahmedabad - 380060, Gujarat,",
+                "C-11 Monark Appartment Nidhi Park Society",
+                "near Ratnba School Thakkarnager,",
+                "Ahmedabad - 382350, Gujarat,",
                 "INDIA"
             ]
         },
-        // Add more offices here if needed
     ];
 
     return (
         <footer className="bg-gradient-to-br from-blue-50 to-blue-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-                {/* Top Section with Logo and Contact Cards */}
-                <div className="flex flex-col lg:flex-row items-start justify-between gap-8 mb-8">
-                    {/* Logo and Company Name in a row */}
-                    <div className="flex flex-col">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                                <img src={logo} alt="Logo"></img>
-                            </div>
-                            <div>
-                                <h2 className="text-2xl font-bold text-blue-900">Sapphire</h2>
-                                <p className="text-sm text-gray-600">Software Solutions</p>
-                            </div>
-                        </div>
-
-                        {/* Contact Details below logo and name */}
-                        <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                            <ContactCard
-                                title="Contact For Sales"
-                                email="contact@sapphiresolutions.net"
-                                phones={["IN: +91-942-970-8562", "US: +1-754-258-7670"]}
-                            />
-                            <ContactCard
-                                title="Contact for Career (Jobs)"
-                                email="careers@sapphiresolutions.net"
-                                phones={["+91-909-997-6034"]}
-                            />
-                        </div>
-
-                        {/* Bottom Section with Reviews and Social */}
-                        <div className="lg:flex-row items-center justify-between gap-6 pt-6 border-t border-blue-200">
-                            {/* Review Badges */}
-                            <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start">
-                                <ReviewBadge
-                                    platform="Google"
-                                    icon={<SiGoogle className="text-red-500 text-lg" />}
-                                    reviewCount="100 REVIEWS"
-                                />
-                                <ReviewBadge
-                                    platform="Clutch"
-                                    icon={
-                                        <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                                            <span className="text-white text-xs font-bold">C</span>
-                                        </div>
-                                    }
-                                    reviewCount="54 REVIEWS"
-                                />
-                                <ReviewBadge
-                                    platform="DesignRush"
-                                    icon={
-                                        <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
-                                            <span className="text-white text-xs font-bold">DR</span>
-                                        </div>
-                                    }
-                                    reviewCount="15 REVIEWS"
-                                />
-                                <div className="flex items-center gap-2">
-                                    <div className="bg-white rounded px-2 py-1 shadow-sm">
-                                        <span className="text-xs font-semibold text-green-600">W3C</span>
-                                    </div>
-                                    <div className="bg-white rounded px-2 py-1 shadow-sm">
-                                        <span className="text-xs font-semibold text-orange-600">HTML5</span>
-                                    </div>
+                {/* Container to align Contact and Office side by side on lg+ */}
+                <div className="flex flex-col lg:flex-row gap-8 mb-8">
+                    {/* Contact Info section */}
+                    <div className="flex-1 flex flex-col justify-between">
+                        {/* Logo + Contact Cards + Reviews and Social */}
+                        <div className="flex flex-col">
+                            {/* Logo and company name */}
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-26 h-26 rounded-lg flex items-center justify-center">
+                                    <img src={logo} alt="Logo" />
+                                </div>
+                                <div>
+                                    <h2 className="text-2xl font-bold text-blue-900">Kryzen</h2>
+                                    <p className="text-sm text-gray-600">Software Solutions</p>
                                 </div>
                             </div>
 
-                            {/* Social Media Links */}
-                            <div className="flex items-center gap-3 mt-9">
-                                <SocialLink
-                                    href="#"
-                                    icon={<SiFacebook className="text-white text-sm" />}
-                                    label="Facebook"
+                            {/* Contact Cards */}
+                            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                                <ContactCard
+                                    title="Contact For Sales"
+                                    email="contact@sapphiresolutions.net"
+                                    phones={["IN: +91-942-970-8562", "US: +1-754-258-7670"]}
                                 />
-                                <SocialLink
-                                    href="#"
-                                    icon={<SiX className="text-white text-sm" />}
-                                    label="Twitter"
+                                <ContactCard
+                                    title="Contact for Career (Jobs)"
+                                    email="careers@sapphiresolutions.net"
+                                    phones={["+91-909-997-6034"]}
                                 />
-                                <SocialLink
-                                    href="#"
-                                    icon={<SiLinkedin className="text-white text-sm" />}
-                                    label="LinkedIn"
-                                />
-                                <SocialLink
-                                    href="#"
-                                    icon={<SiInstagram className="text-white text-sm" />}
-                                    label="Instagram"
-                                />
-                                <SocialLink
-                                    href="#"
-                                    icon={<SiYoutube className="text-white text-sm" />}
-                                    label="YouTube"
-                                />
+                            </div>
+
+                            {/* Reviews and social */}
+                            <div className="lg:flex-row items-center justify-between gap-6 pt-6 border-t border-blue-200 flex flex-col">
+                                <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start">
+                                    <ReviewBadge
+                                        platform="Google"
+                                        icon={<SiGoogle className="text-red-500 text-lg" />}
+                                        reviewCount="100 REVIEWS"
+                                    />
+                                    <ReviewBadge
+                                        platform="Clutch"
+                                        icon={
+                                            <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
+                                                <span className="text-white text-xs font-bold">C</span>
+                                            </div>
+                                        }
+                                        reviewCount="54 REVIEWS"
+                                    />
+                                    <ReviewBadge
+                                        platform="DesignRush"
+                                        icon={
+                                            <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                                <span className="text-white text-xs font-bold">DR</span>
+                                            </div>
+                                        }
+                                        reviewCount="15 REVIEWS"
+                                    />
+                                    <div className="flex items-center gap-2">
+                                        <div className="bg-white rounded px-2 py-1 shadow-sm">
+                                            <span className="text-xs font-semibold text-green-600">W3C</span>
+                                        </div>
+                                        <div className="bg-white rounded px-2 py-1 shadow-sm">
+                                            <span className="text-xs font-semibold text-orange-600">HTML5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Social Media Links */}
+                                <div className="flex items-center gap-3 mt-9">
+                                    <SocialLink
+                                        href="#"
+                                        icon={<SiFacebook className="text-white text-sm" />}
+                                        label="Facebook"
+                                    />
+                                    <SocialLink
+                                        href="#"
+                                        icon={<SiX className="text-white text-sm" />}
+                                        label="Twitter"
+                                    />
+                                    <SocialLink
+                                        href="#"
+                                        icon={<SiLinkedin className="text-white text-sm" />}
+                                        label="LinkedIn"
+                                    />
+                                    <SocialLink
+                                        href="#"
+                                        icon={<SiInstagram className="text-white text-sm" />}
+                                        label="Instagram"
+                                    />
+                                    <SocialLink
+                                        href="#"
+                                        icon={<SiYoutube className="text-white text-sm" />}
+                                        label="YouTube"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Responsive Office Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    {/* India HQ: Make this card span 2 columns on md+ screens */}
-                    <div className="md:col-span-2">
+                    {/* Office info section - make it same height as contact info */}
+                    <div className="flex-1 flex flex-col justify-center">
                         <OfficeCard
                             country={offices[0].country}
                             flag={offices[0].flag}
@@ -232,22 +231,13 @@ export default function AppFooter() {
                             highlight={true}
                         />
                     </div>
-                    {/* Render other offices here in future as needed
-                    {offices.slice(1).map((office, idx) => (
-                        <OfficeCard
-                            key={idx}
-                            country={office.country}
-                            flag={office.flag}
-                            address={office.address}
-                        />
-                    ))} */}
                 </div>
 
-                {/* Copyright and Links */}
+                {/* Copyright */}
                 <div className="mt-6 pt-6 border-t border-blue-200 text-center w-full">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p className="text-sm text-black-600">
-                            © 2023 Sapphire Software Solutions. All rights reserved.
+                            © 2025 Kryzen Software Solutions. All rights reserved.
                         </p>
                         <div className="flex items-center gap-6">
                             <a

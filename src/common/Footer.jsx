@@ -75,6 +75,10 @@ const getLinks = (category, links) => (
           <Link to="/choose" className="text-gray-600 hover:text-blue-600 text-sm block">
             • {link}
           </Link>
+        ) : link === "Events & Activities" ? (
+          <Link to="/events-activity" className="text-gray-600 hover:text-blue-600 text-sm block">
+            • {link}
+          </Link>
         ) : (
           <Link to="#" className="text-gray-600 hover:text-blue-600 text-sm block">
             • {link}

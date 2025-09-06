@@ -1,8 +1,10 @@
+import { FaLinkedinIn } from "react-icons/fa";
+
 const logos = [
     {
         src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
         alt: "Microsoft",
-        colorClass: "hover:grayscale-0",         // (color SVG)
+        colorClass: "hover:grayscale-0",
     },
     {
         src: "https://yt3.googleusercontent.com/ytc/AIdro_m_5VVnbUDsq-tTT51qiDCrPX5v5CFi-LK1EbJnMKtcIQ4=s900-c-k-c0x00ffffff-no-rj",
@@ -76,6 +78,68 @@ const logos = [
     },
 ];
 
+export function CTAWorkTogether() {
+    return (
+        <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-16 px-4 relative overflow-hidden">
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
+                <div className="absolute bottom-20 right-20 w-32 h-32 bg-white rounded-full"></div>
+                <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white rounded-full"></div>
+            </div>
+
+            <div className="max-w-4xl mx-auto text-center relative z-10">
+                <h2 className="text-4xl font-bold text-white mb-4">
+                    Let's Work Together On Your Next Digital Project
+                </h2>
+                <p className="text-blue-100 text-lg mb-8 max-w-3xl mx-auto">
+                    Ready to start your next project ? We would love to hear from you. Let's discuss how we can help you achieve your business goals.
+                </p>
+                <button className="bg-white text-blue-800 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+                    Request A Free Quote
+                </button>
+            </div>
+        </section>
+    );
+}
+
+export function CTASubscribe() {
+    return (
+        <section className="bg-blue-50 py-12 px-4">
+            <div className="max-w-6xl mx-auto">
+                <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+                    Subscribe us and Get the latest updates and news
+                </h2>
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                    <input
+                        type="text"
+                        placeholder="Your name *"
+                        className="flex-1 max-w-xs px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <input
+                        type="email"
+                        placeholder="Your Email ID *"
+                        className="flex-1 max-w-xs px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <div className="flex flex-1 max-w-xs">
+                        <span className="inline-flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg text-gray-600">
+                            +91
+                        </span>
+                        <input
+                            type="tel"
+                            placeholder="Mobile Number *"
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <button className="bg-blue-800 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-900 transition-colors">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 export default function FeaturedLogos() {
     return (
         <>
@@ -98,60 +162,9 @@ export default function FeaturedLogos() {
                 </div>
             </section>
 
-            <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-16 px-4 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
-          <div className="absolute bottom-20 right-20 w-32 h-32 bg-white rounded-full"></div>
-          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white rounded-full"></div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Let's Work Together On Your Next Digital Project
-          </h2>
-          <p className="text-blue-100 text-lg mb-8 max-w-3xl mx-auto">
-            Ready to start your next project ? We would love to hear from you. Let's discuss how we can help you achieve your business goals.
-          </p>
-          <button className="bg-white text-blue-800 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
-            Request A Free Quote
-          </button>
-        </div>
-      </section>
+            <CTAWorkTogether />
 
-      {/* Second CTA Section - Light Blue Background */}
-      <section className="bg-blue-50 py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Subscribe us and Get the latest updates and news
-          </h2>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <input
-              type="text"
-              placeholder="Your name *"
-              className="flex-1 max-w-xs px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <input
-              type="email"
-              placeholder="Your Email ID *"
-              className="flex-1 max-w-xs px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <div className="flex flex-1 max-w-xs">
-              <span className="inline-flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg text-gray-600">
-                +91
-              </span>
-              <input
-                type="tel"
-                placeholder="Mobile Number *"
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <button className="bg-blue-800 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-900 transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </section>
+            <CTASubscribe />
         </>
     );
 }

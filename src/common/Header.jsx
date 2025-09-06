@@ -768,9 +768,10 @@
 // }
 
 import { useState, useEffect } from "react";
-import { ChevronDown, Menu, X, Mail, Calendar, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
-import logo from "./image.png"; // Replace with your actual logo import
+import { ChevronDown, Menu, X, Mail, Calendar, MapPin, Briefcase } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "./logo.png"; 
+
 
 
 const ratings = [
@@ -833,6 +834,8 @@ export default function Header() {
   const [activeService, setActiveService] = useState("Mobile App Development");
 const [openDropdown, setOpenDropdown] = useState(null);
 
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   
   useEffect(() => {
     const handleScroll = () => {
@@ -866,8 +869,8 @@ const [openDropdown, setOpenDropdown] = useState(null);
     <div className="relative">
       {/* Contact Bar */}
       <div
-        className={`contact-bar-transition bg-contact-bg text-black px-4 py-2 text-sm overflow-hidden fixed top-0 left-0 right-0 z-40 ${isScrolled ? "hidden" : ""
-          }`}
+       className={`contact-bar-transition bg-contact-bg text-black px-4 py-2 text-sm overflow-hidden fixed top-0 left-0 right-0 z-40
+    ${isScrolled ? "hidden" : ""} hidden md:flex`}
         data-testid="contact-bar"
       >
         <div className="container mx-auto">
@@ -876,12 +879,10 @@ const [openDropdown, setOpenDropdown] = useState(null);
             <div className="flex flex-wrap items-center gap-6">
               {/* US Sales */}
               <div className="flex items-center gap-2">
-                <img
-                  src="https://flagcdn.com/w20/us.png"
-                  alt="US Flag"
-                  className="w-4 h-3"
-                />
-                <span className="text-xs lg:text-sm text-white">For Sales: +1-954-258-7870</span>
+                <Briefcase className="w-4 h-4 text-blue-300"/>
+                <span className={`text-xs lg:text-sm ${
+  (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+}`}>For Career: career@kryzensoftwaresolutions.com</span>
               </div>
 
               {/* India Sales */}
@@ -891,13 +892,17 @@ const [openDropdown, setOpenDropdown] = useState(null);
                   alt="India Flag"
                   className="w-4 h-3"
                 />
-                <span className="text-xs lg:text-sm text-white">For Sales: +91-942-070-8662</span>
+                <span className={`text-xs lg:text-sm ${
+  (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+}`}>For Sales: +91-942-070-8662</span>
               </div>
 
               {/* Company Location */}
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-blue-300" />
-                <span className="text-xs lg:text-sm text-white">Kryzen Software Solutions</span>
+                <span className={`text-xs lg:text-sm ${
+  (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+}`}>Kryzen Software Solutions</span>
               </div>
             </div>
 
@@ -906,15 +911,19 @@ const [openDropdown, setOpenDropdown] = useState(null);
               {/* Email Contact */}
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-blue-300" />
-                <span className="text-xs lg:text-sm text-white">contact@Kryzensolutions.net</span>
+                <span className={`text-xs lg:text-sm ${
+  (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+}`}>contact@kryzensoftwaresolutions.com</span>
               </div>
 
               {/* Schedule Meeting */}
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-blue-300" />
                 <button
-                  className="text-xs lg:text-sm text-white cursor-pointer hover:text-blue-200 transition-colors"
-                  data-testid="button-schedule-meeting"
+                  className={`text-xs lg:text-sm cursor-pointer hover:text-blue-200 transition-colors"
+                  data-testid="button-schedule-meeting ${
+  (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+}`}
                 >
                   Schedule a Meeting
                 </button>
@@ -932,9 +941,9 @@ const [openDropdown, setOpenDropdown] = useState(null);
             {/* LOGO */}
             <div className="flex items-center whitespace-nowrap gap-3 mr-8 flex-shrink-0">
               <Link to='/' className="rounded p-2 flex-shrink-0">
-                <img src={logo} alt="Logo" className="h-12 w-12 object-contain" />
+                <img src={logo} alt="Logo" className="h-40 w-25 object-contain"/>
               </Link>
-              <Link to='/'><span className={`text-2xl font-bold ${isScrolled ? "text-black" : "text-navbar-text text-white"}`}>Kryzen</span><p className={`${isScrolled ? "text-black" : " text-white"}`}>Software solutions</p></Link>
+              <Link to='/' style={{transform: 'transLateX(-1rem)'}}><span className={`text-2xl font-bold ${(!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"}`}>Kryzen</span><p className={`${(!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"}`}>Software solutions</p></Link>
             </div>
             <div className="hidden lg:flex flex-1 flex-wrap items-center space-x-3">
               {/* Mega Menu Triggers */}
@@ -947,9 +956,10 @@ const [openDropdown, setOpenDropdown] = useState(null);
                 <div key={label} className="relative"
                   onMouseEnter={() => setMegaMenuVisible(menu)}
                   onMouseLeave={() => setMegaMenuVisible(null)}
+                  style={{zIndex: 1000}}
                 >
                   <button className={`flex items-center font-semibold px-4 py-2 transition ${
-      isScrolled ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
+      (!isHome || isScrolled) ? "text-black hover:text-blue-700" : "text-white hover:text-blue-300"
     }`}>
                     {label}
                     <ChevronDown className="w-4 h-4 ml-1" />
@@ -959,7 +969,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                   {megaMenuVisible === menu && (
                     <div>
                       {menu === 'company' && (
-                        <div className="absolute left-[24rem] top-full mt-3 w-[100vw] max-w-[1750px] -translate-x-1/2 bg-white z-50 py-0 px-0 overflow-x-auto">
+                        <div className="absolute left-[28rem] top-full mt-3 w-[100vw] max-w-[1750px] -translate-x-1/2 bg-white z-50 py-0 px-0 overflow-x-auto">
                         <div className="flex">
                          {/* Left section */}
                          <div className="bg-[#005D89] text-white flex flex-col items-start p-10 min-w-[330px] max-w-[390px]">
@@ -980,20 +990,24 @@ const [openDropdown, setOpenDropdown] = useState(null);
                                <div className="space-y-2 text-gray-800">
                                  <div className="flex gap-15 whitespace-nowrap">
                                    <div className="w-full">
-                                     <Link to='/about-Kryzen-Software-Solutions' onClick={() => setMegaMenuVisible(null)} className="w-full hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">About Kryzen</Link>
-                                     <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">CEO Message</div>
-                                     <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Events & Activities</div>
+                                     <Link to='/about-Kryzen-Software-Solutions' onClick={() => setMegaMenuVisible(null)} className="block w-full hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">
+    About Kryzen
+  </Link>
+  <Link to="/ceo-message" onClick={() => setMegaMenuVisible(null)} className="block w-full hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">
+    CEO Message
+  </Link>
+                                     <Link to='/events-activity' className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Events & Activities</Link>
                                      <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Brochure</div>
+
                                    </div>
                                    <div>
-                                     <Link to='/choose' onMouseLeave={() => setMegaMenuVisible(null)} className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Why Choose Us</Link>
-                                     <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Women Empowerment</div>
-                                    <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Awards & Recognition</div>                </div>
+                                        <Link to='/choose' onMouseLeave={() => setMegaMenuVisible(null)} className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Why Choose Us</Link>
+                                                                           <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Insightful videos</div>
+                                      </div>
+                                      
                                    <div>
                                      <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Blog</div>
                                      <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Careers</div>
-                                     <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">CSR</div>
-                                     <div className="hover:bg-blue-600 hover:text-white hover:p-1 cursor-pointer py-1 rounded">Podcast</div>
                                    </div>
                                  </div>
                                </div>
@@ -1033,7 +1047,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                           </div>
                       )} 
                       {menu === 'service' && (
-                        <div className="absolute left-[8rem] w-[100vw] mt-3 max-w-[1750px] -translate-x-1/2 bg-white z-50 shadow-xl flex rounded">
+                        <div className="absolute left-[20rem] w-[100vw] mt-3 max-w-[1750px] -translate-x-1/2 bg-white z-50 shadow-xl flex rounded">
                       {/* Left info panel */}
                       <div className="bg-[#0178a8] text-white flex flex-col justify-between p-10 min-w-[330px] max-w-[390px]">
                         <div>
@@ -1090,7 +1104,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                     </div>
                       )}
                       {menu === 'technology' && (
-                       <div className="absolute left-[1rem] top-full mt-3 w-[100vw] max-w-[1800px] -translate-x-1/2 bg-white z-50 shadow-xl rounded transition-all duration-200 py-0 px-0 overflow-x-auto">
+                       <div className="absolute left-[13rem] top-full mt-3 w-[100vw] max-w-[1800px] -translate-x-1/2 bg-white z-50 shadow-xl rounded transition-all duration-200 py-0 px-0 overflow-x-auto">
                       <div className="flex">
                         {/* Left Blue Section */}
                         <div className="bg-[#005D89] text-white flex flex-col items-start p-10 min-w-[330px] max-w-[390px]">
@@ -1166,7 +1180,7 @@ const [openDropdown, setOpenDropdown] = useState(null);
                     </div>
                       )}
                       {menu === 'ourwork' && (
-                        <div className="absolute left-[-8rem] mt-3 w-[100vw] max-w-[1800px] -translate-x-1/2 bg-white z-50 shadow-xl rounded transition-all duration-200 py-0 px-0 overflow-x-auto">
+                        <div className="absolute left-[4rem] mt-3 w-[100vw] max-w-[1800px] -translate-x-1/2 bg-white z-50 shadow-xl rounded transition-all duration-200 py-0 px-0 overflow-x-auto">
                    <div className="w-full flex bg-white text-gray-900 rounded shadow-xl pb-7 overflow-hidden" style={{ minHeight: 390 }}>
                         {/* Left Panel */}
                         <div className="bg-[#0178a8] flex flex-col justify-between text-white p-10 min-w-[350px] max-w-[390px]">
